@@ -1,7 +1,7 @@
 // To help us use arrays with real world problems we are going to simulate a used car dealer that has 50 cars in their inventory.
 
 // The car dealer has all of their inventory housed in the array seen below.  Scroll down past the data to find out how you can help the car dealer.
-
+console.log('########## ARRAYS ##########');
 let inventory = [
   { id: 1, car_make: "Lincoln", car_model: "Navigator", car_year: 2009 },
   { id: 2, car_make: "Mazda", car_model: "Miata MX-5", car_year: 2001 },
@@ -75,30 +75,43 @@ let inventory = [
 
 // ==== Challenge 1 ====
 // The dealer can't recall the information for a car with an id of 33 on his lot. Help the dealer find out which car has an id of 33 by logging the car's year, make, and model in the console log provided to you below:
-console.log(`Car 33 is a *car year goes here* *car make goes here* *car model goes here*`);
+const car33 = inventory.find((car)=> car.id===33);
+const car33MSG = `Car 33 is a ${car33.car_year} ${car33.car_make} ${car33.car_model}.`
+
+document.getElementById('aChallenge1').innerText = car33MSG;
+console.log(car33MSG);
 
 // ==== Challenge 2 ====
 // The dealer needs the information on the last car in their inventory.  What is the make and model of the last car in the inventory?  Log the make and model into the console.
-let lastCar = 0;
-console.log();
+const lastCar = inventory[inventory.length-1];
+const lastCarMSG = `The last car in the inventory is a ${lastCar.car_year} ${lastCar.car_make} ${lastCar.car_model}.`
+document.getElementById('aChallenge2').innerText = lastCarMSG;
+
+console.log(lastCarMSG);
 
 // ==== Challenge 3 ====
 // The marketing team wants the car models listed alphabetically on the website. Sort all the car model names into alphabetical order and log the results in the console
-let carModels = [];
-let carModelsSorted = [];
-console.log();
+let carModels = inventory.map((car)=> car.car_model);
+document.getElementById('aChallenge3').innerHTML = carModels.sort().slice(0,5).toString().replace(/,/g,'<br/>') +"<br/> (The rest is in console log)";
+console.log(carModels.sort());
 
 // ==== Challenge 4 ====
 // The accounting team needs all the years from every car on the lot. Create a new array from the dealer data containing only the car years and log the result in the console.
-let carYears = [];
-console.log();
+let carYears = inventory.map((car)=> car.car_year);
+document.getElementById('aChallenge4').innerHTML = carYears.slice(0,5).sort().toString().replace(/,/g, "<br/>") + "<br/> (The rest is in console log)";
+
+console.log(carYears);
 
 // ==== Challenge 5 ====
 // The car lot manager needs to find out how many cars are older than the year 2000. Using the carYears array you just created, find out how many cars were made before the year 2000 by populating the array oldCars and logging it's length.
-let oldCars = [];
-console.log();
+let oldCars = inventory.filter((car)=> car.car_year < 2000);
+const oldCarsMSG=`There are ${oldCars.length} that are older than the year 2000`
+document.getElementById('aChallenge5').innerHTML = oldCarsMSG;
+
+console.log(oldCarsMSG);
 
 // ==== Challenge 6 ====
 // A buyer is interested in seeing only BMW and Audi cars within the inventory. Return an array that only contains BMW and Audi cars.  Once you have populated the BMWAndAudi array, use JSON.stringify() to show the results of the array in the console.
-let BMWAndAudi = [];
-console.log();
+let BMWAndAudi = inventory.filter((car) => car.car_make === "BMW" || car.car_make === "Audi");
+document.getElementById('aChallenge6').innerHTML = BMWAndAudi.map((car) => `${car.car_make}  ${car.car_model}  ${car.car_year} <br/>`).sort().toString().replace(/,/g,"")
+console.log(JSON.stringify(BMWAndAudi,null,"\t"));
